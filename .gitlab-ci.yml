@@ -9,4 +9,4 @@ transfer_sftp:
     - apt-get update -qq && apt-get install -y -qq lftp sshpass
     - lftp -e "set sftp:auto-confirm yes; mirror -e -P 4 --transfer-all --exclude .git/ --reverse -X .* --verbose ./ /home/ubuntu/andres/pruebas-ci/; quit" -u $USER,$PASSWORD sftp://$HOST -p 222
     - export SSHPASS=$PASSWORD
-    - script -qc "sshpass -e ssh -l $USER@$HOST /home/ubuntu/andres/prueba.sh" /dev/null
+    - sshpass -e ssh -l $USER@$HOST /home/ubuntu/andres/prueba.sh
