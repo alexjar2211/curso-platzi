@@ -3,15 +3,8 @@ image: node:12.0.0
 stages:
   - deploy
 
-pages:
+transfer_sftp:
   stage: deploy
   script:
-    - mkdir public
-    - mv ./ ./public/
-  artifacts:
-    paths:
-      - public
-  environment: 
-    name: production
-  only:
-    - branches
+    - apt-get update -qq && apt-get install -y -qq lftp
+    - lftp -e "mirror -e -P 4 --transfer-all --reverse -X .* --verbose ./ /home/ubuntu/andres/pruebas-ci/; quit" -u $USER,$PASSWORD sftp://$HOST -p 222
