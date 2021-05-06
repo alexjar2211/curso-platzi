@@ -7,4 +7,4 @@ transfer_sftp:
   stage: deploy
   script:
     - apt-get update -qq && apt-get install -y -qq lftp
-    - lftp -e "mirror -e -P 4 --transfer-all --reverse -X .* --verbose ./ /home/ubuntu/andres/pruebas-ci/; quit" -u $USER,$PASSWORD sftp://$HOST -p 222
+    - lftp -e "set sftp:auto-confirm yes; mirror -e -P 4 --transfer-all --reverse -X .* --verbose ./ /home/ubuntu/andres/pruebas-ci/; quit" -u $USER,$PASSWORD sftp://$HOST -p 222
