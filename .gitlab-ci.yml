@@ -1,0 +1,17 @@
+image: node:12.0.0
+
+stage:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - mv ./ ./public/
+  artifacts:
+    paths:
+      - public
+  environment: 
+    name: production
+  only:
+    - branches
